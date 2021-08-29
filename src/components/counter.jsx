@@ -1,42 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-
-  const formCount = () => {
-    return count === 0 ? "Ноль" : count;
+const Counter = (props) => {
+  const formValue = () => {
+    return props.value === 0 ? "Ноль" : props.value;
   };
 
   const getBadgeClasses = () => {
     let classes = "badge m-2 bg-";
-    classes += count === 0 ? "danger" : "primary";
+    classes += props.value === 0 ? "danger" : "primary";
     return classes;
   };
 
-  const handleIncrement = (productId) => {
-    setCount(count + 1);
-  };
-
-  const handleDecrement = (productId) => {
-    setCount(count === 0 ? count : count - 1);
-  };
-
   return (
-    <>
-      <span className={getBadgeClasses()}>{formCount()}</span>
+    <div>
+      <h4>{props.name}</h4>
+      <span className={getBadgeClasses()}>{formValue()}</span>
       <button
-        onClick={() => handleIncrement({ id: 1 })}
+        onClick={() => props.onIncrement(props.id)}
         className="btn btn-secondary btn-sm"
       >
         Increment
       </button>
       <button
-        onClick={() => handleDecrement({ id: 1 })}
+        onClick={() => props.onDecrement(props.id)}
         className="btn btn-secondary btn-sm"
       >
         Decrement
       </button>
-    </>
+      <button
+        className="btn btn-danger btn-sm m-2"
+        onClick={() => props.onDelete(props.id)}
+      >
+        Delete
+      </button>
+    </div>
   );
 };
 
