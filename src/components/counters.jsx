@@ -3,7 +3,7 @@ import Counter from "./counter";
 
 const initialState = [
   { value: 0, id: 1, name: "Ложка" },
-  { value: 0, id: 2, name: "Вилка" },
+  { value: 4, id: 2, name: "Вилка" },
   { value: 0, id: 3, name: "Тарелка" },
   { value: 0, id: 4, name: "Стартовый набор минималиста" },
   { value: 0, id: 5, name: "Ненужные вещи" },
@@ -30,8 +30,8 @@ const Counters = () => {
   const handleDecrement = (counterId) => {
     setCounters(
       counters.map((counter) =>
-        counter.id === counterId
-          ? { ...counter, value: (counter.value += 1) }
+        counter.id === counterId && counter.value > 0
+          ? { ...counter, value: (counter.value -= 1) }
           : counter
       )
     );
